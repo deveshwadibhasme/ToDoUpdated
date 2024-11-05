@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>What to do today?</title>
+    <link rel='stylesheet' href='style.css'>
+    <script src='https://kit.fontawesome.com/0f0486bb75.js' crossorigin='anonymous'></script>
+    <script src='script.js' defer></script>
+</head>
+
+<body>
+    <!-- Full page -->
+    <div class="wrapper">
+        <div class="upper-background">
+            <div class="under-wrapper">
+                <h1>TODO</h1>
+                <div class="input-box">
+                    <div class="circle"></div>
+                    <!-- Text Input -->
+                    <input type="text" autofocus name="input" class="input" autofocus placeholder="Enter Your Tasks....">
+                    <button class="add-it" onclick="addTask()">ADD</button>
+                </div>
+            </div>
+        </div>
+        <div class="lower-background">
+            <!-- Task Showcase -->
+            <ul class="task-list-container">
+                <li class="task-list">
+                    <div class="check function">
+                        <img src="/img/not-checked.png" class="check-tap" alt="check">
+                    </div>
+                    <input class="task-value" readonly value=""></input>
+                    <div class="edit function">
+                        <img src="/img/edit.png" 
+                        class="edit-tap" alt="edit">
+                    </div>
+                    <div class="delete function">
+                        <img src="/img/delete.png" class="delete-tap" alt="delete">
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Full page end-->
+</body>
+
+</html>

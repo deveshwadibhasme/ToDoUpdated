@@ -1,0 +1,165 @@
+/* Resetting Properties and applying font*/
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
+  outline: 0;
+  border: 0;
+  color: var(--white-flash);
+  img {
+    height: 100%;
+    width: 100%;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  li{
+    list-style: none;
+  }
+  input{
+    min-height: 35px;
+    height: 100%;
+    max-width: 360px;
+    width: 100%;
+    padding: 5px;
+    background-color: transparent;
+    font-weight: 500;
+    flex-grow: 1;
+    &::placeholder{
+      color: black;
+    }
+  }
+}
+
+.wrapper {
+  max-width: 100vw;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.upper-background {
+  max-width:100vw;
+  min-height: 280px;
+  background:url(/img/wallpaper-preview.jpg) no-repeat;
+  background-size: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upper-background h1{
+  color: white;
+}
+
+.upper-background .under-wrapper{
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+}
+
+.upper-background .input-box {
+  margin: 0 auto;
+  display: flex;
+  max-width: 500px;
+  width: 100%;
+  min-height: 35px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  padding-left: 7px;
+  margin-bottom: 10px;
+  background-color: rgb(244, 227, 196) ;
+  border-radius: 10px;
+}
+
+.upper-background .input-box .circle{
+  max-width: 15px;
+  width: 100%;
+  height: 15px;
+  border-radius: 50%;
+  background-color: red;
+  margin-bottom: 2px;
+  animation: shadowDance 2s linear alternate-reverse infinite;
+}
+
+@keyframes shadowDance {
+  from{
+    box-shadow: 0px 0px 0px 0px red;
+  }
+  to{
+    box-shadow: 1px 1px 4px 5px red;
+  }
+}
+
+.upper-background .input-box button{
+  width: 90px;
+  height: 35px;
+  background-color: rgb(234, 123, 32);
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover{
+    background-color: hsl(27, 83%, 42%);
+    color: aliceblue;
+  }
+}
+
+.lower-background{
+  max-width: 100vw;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: top;
+  position: relative;
+}
+
+.task-list-container{
+  max-width: 500px;
+  width: 100%;
+  min-height: 300px;
+  height: 100%;
+  position: absolute;
+  margin-top: -50px;
+  background-color: aliceblue;
+  border-radius: 10px;
+  padding: 10px;
+  user-select: none;
+  overflow-y: scroll;
+  &::-webkit-scrollbar{
+    width: 10px;
+  }
+}
+
+.task-list{
+  margin: 0 auto;
+  display: flex;
+  max-width: 500px;
+  min-height: 35px;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 5px;
+  margin-bottom: 10px;
+  background-color: rgb(244, 227, 196) ;
+  border-radius: 10px;
+}
+
+.task-list .function{
+  max-width: 25px;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  &:hover{
+    background-color: rgb(128, 209, 70);
+  }
+}
