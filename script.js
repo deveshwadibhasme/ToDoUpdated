@@ -5,6 +5,7 @@ let taskListLI = document.querySelector('.task-list')
 
 function addTask() {                                         // Function for trigger add button
     if (taskInput.value === '') {
+        localStorage.clear();
     }
     else {
         taskAdd();
@@ -115,13 +116,4 @@ function taskListAnime(fade, parentClass) {                 // RandomAnimation F
         }
     }
     count++;
-}
-
-function saveForLater(data) {                                    // Local Storage
-    localStorage.setItem('data',data)
-}
-
-function showTheData(){
-    let data = localStorage.getItem('data')
-    
 }
