@@ -34,7 +34,6 @@ function taskAdd() {                                        // HTML function for
                     <img src = "/img/delete.png" class="delete-tap" alt="delete">
                 </div>
                 <div class = "timing">Time: ${currentTiming}</div>`
-        saveForLater(taskList.innerHTML)
         taskContainer.appendChild(taskList)
     }
     taskInput.value = ''
