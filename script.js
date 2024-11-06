@@ -3,12 +3,13 @@ let taskValue = document.querySelector('.task-value')
 let taskContainer = document.querySelector('.task-list-container')
 let taskListLI = document.querySelector('.task-list')
 
-function addTask() {                                         // Function for trigger add button
+function addTask() {                                        // Function for trigger add button
     if (taskInput.value === '') {
     }
     else {
         taskAdd();
     }
+    saveForLater()
 }
 let currentTiming = new Date().toLocaleTimeString('en-us',  // Function for Current Timing
     {
@@ -17,7 +18,7 @@ let currentTiming = new Date().toLocaleTimeString('en-us',  // Function for Curr
         hour12: false
     })
 
-function taskAdd() {                                        // HTML function for adding task to taskcontainer
+function taskAdd() {                                        // HTML function for Adding task to taskContainer
     if (taskInput.value === '') {
     } else {
         let taskList = document.createElement('li')
@@ -35,11 +36,12 @@ function taskAdd() {                                        // HTML function for
                 </div>
                 <div class = "timing">Time: ${currentTiming}</div>`
         taskContainer.appendChild(taskList)
+        saveForLater();
     }
     taskInput.value = ''
 }
 
-taskContainer.addEventListener('click', (e) => {                 // Mouse Events Edit,Delete & Check
+taskContainer.addEventListener('click', (e) => {            // Mouse Events Edit,Delete & Checked
     // Edit
     if (e.target.className === 'edit-tap') {
         // Input Changing
@@ -47,13 +49,15 @@ taskContainer.addEventListener('click', (e) => {                 // Mouse Events
         taskSelector.toggleAttribute('readonly')
         taskSelector.focus()
         taskSelector.setSelectionRange(taskSelector.value.length, taskSelector.value.length);
-
+        saveForLater();
         // Sign Changing
         let editDone = true
         if (e.target.src === `${window.location.origin}/img/edit.png`) {
             editDone = false
+            saveForLater();
         }
         e.target.src = editDone ? `${window.location.origin}/img/edit.png` : `${window.location.origin}/img/edit-done.svg`
+        saveForLater();
     }
 
     // Delete
@@ -61,6 +65,7 @@ taskContainer.addEventListener('click', (e) => {                 // Mouse Events
         const taskDeletion = e.target.parentNode.parentNode
         taskListAnime(e.target, taskDeletion)
         setTimeout(() => taskDeletion.remove(), 200);
+        saveForLater();
     }
 
     // Checked
@@ -79,11 +84,14 @@ taskContainer.addEventListener('click', (e) => {                 // Mouse Events
             } else {
                 taskClick.previousElementSibling.childNodes[1].src = `${window.location.origin}/img/not-checked.png`
             }
+            saveForLater();
         }
+        saveForLater();
     }
+    saveForLater();
 })
 
-taskContainer.addEventListener('keyup', (e) => {             // Keyboard Events Edit,Delete & Check
+taskContainer.addEventListener('keyup', (e) => {            // Keyboard Events Edit,Delete & Check
     // Edit
     if (e.key === 'Enter') {
         e.target.setAttribute('readonly', 'true')
@@ -93,6 +101,7 @@ taskContainer.addEventListener('keyup', (e) => {             // Keyboard Events 
         }
         e.target.nextElementSibling.childNodes[1].src = editDone ? `${window.location.origin}/img/edit-done.svg` : `${window.location.origin}/img/edit.png`
     }
+    saveForLater();
 })
 taskInput.addEventListener('keyup', (e) => {                // Keyboard Events Edit,Delete & Check
     if (e.key === 'Enter') {
@@ -101,7 +110,9 @@ taskInput.addEventListener('keyup', (e) => {                // Keyboard Events E
         else {
             taskAdd();
         }
+
     }
+    saveForLater();
 })
 
 let count = 0;
@@ -122,3 +133,13 @@ function taskListAnime(fade, parentClass) {                 // RandomAnimation F
     }
     count++;
 }
+
+function saveForLater() {
+    localStorage.setItem('data', taskContainer.innerHTML)
+}
+
+function showTheData() {
+    let data = localStorage.getItem('data')
+    taskContainer.innerHTML = data
+}
+showTheData();
