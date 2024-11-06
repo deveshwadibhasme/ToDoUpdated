@@ -64,9 +64,7 @@ taskContainer.addEventListener('click', (e) => {            // Mouse Events Edit
     if (e.target.className === 'delete-tap') {
         const taskDeletion = e.target.parentNode.parentNode
         taskListAnime(e.target, taskDeletion)
-        setTimeout(() => taskDeletion.remove(), 200);
-        saveForLater();
-    }
+        setTimeout(() => {taskDeletion.remove(), saveForLater()}, 200);    }
 
     // Checked
     if (e.target.className === 'check-tap' || e.target.className === 'task-value') {
@@ -91,7 +89,7 @@ taskContainer.addEventListener('click', (e) => {            // Mouse Events Edit
     saveForLater();
 })
 
-taskContainer.addEventListener('keyup', (e) => {            // Keyboard Events Edit,Delete & Check
+taskContainer.addEventListener('keyup', (e) => {            // Keyboard Events Edit Done
     // Edit
     if (e.key === 'Enter') {
         e.target.setAttribute('readonly', 'true')
@@ -137,6 +135,7 @@ function taskListAnime(fade, parentClass) {                 // RandomAnimation F
 function saveForLater() {
     localStorage.setItem('data', taskContainer.innerHTML)
 }
+
 
 function showTheData() {
     let data = localStorage.getItem('data')
