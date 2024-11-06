@@ -5,7 +5,6 @@ let taskListLI = document.querySelector('.task-list')
 
 function addTask() {                                         // Function for trigger add button
     if (taskInput.value === '') {
-        localStorage.clear();
     }
     else {
         taskAdd();
@@ -66,19 +65,19 @@ taskContainer.addEventListener('click', (e) => {                 // Mouse Events
     }
 
     // Checked
-    let checkedBtn = document.querySelector('.check-tap')
+
     if (e.target.className === 'check-tap' || e.target.className === 'task-value') {
+        let checkedBtn = e.target
         let checked = true
         if (checkedBtn.src === `${window.location.origin}/img/not-checked.png`) {
             checked = false
         }
         checkedBtn.src = checked ? `${window.location.origin}/img/not-checked.png` : `${window.location.origin}/img/checked.png`
-        checkedBtn.src = checked ? checkedBtn.parentElement.parentElement.childNodes[4].style.o : `${window.location.origin}/img/checked.png`
         checkedBtn.parentElement.nextElementSibling.classList.toggle('checked')
     }
 })
 
-taskContainer.addEventListener('keyup', (e) => {                 // Keyboard Events Edit,Delete & Check
+taskContainer.addEventListener('keyup', (e) => {             // Keyboard Events Edit,Delete & Check
     // Edit
     if (e.key === 'Enter') {
         e.target.setAttribute('readonly', 'true')
@@ -99,10 +98,10 @@ taskInput.addEventListener('keyup', (e) => {                // Keyboard Events E
     }
 })
 
+let count = 0;
 function taskListAnime(fade, parentClass) {                 // RandomAnimation Function
-    let count = 0
     if (fade.className === 'task-list') {
-        if (count % 2 == 0) {
+        if (count % 2 === 0) {
             fade.style.animation = 'faded-in-right  0.4s linear'
         } else {
             fade.style.animation = 'faded-in-left 0.4s linear'
