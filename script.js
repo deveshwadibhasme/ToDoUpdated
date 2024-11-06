@@ -64,7 +64,6 @@ taskContainer.addEventListener('click', (e) => {                 // Mouse Events
     }
 
     // Checked
-
     if (e.target.className === 'check-tap' || e.target.className === 'task-value') {
         let checkedBtn = e.target
         let checked = true
@@ -72,7 +71,15 @@ taskContainer.addEventListener('click', (e) => {                 // Mouse Events
             checked = false
         }
         checkedBtn.src = checked ? `${window.location.origin}/img/not-checked.png` : `${window.location.origin}/img/checked.png`
-        checkedBtn.parentElement.nextElementSibling.classList.toggle('checked')
+        // if task was click
+        if (e.target.className === 'task-value') {
+            let taskClick = e.target
+            if (taskClick.previousElementSibling.childNodes[1].src === `${window.location.origin}/img/not-checked.png`) {
+                taskClick.previousElementSibling.childNodes[1].src = `${window.location.origin}/img/checked.png`
+            } else {
+                taskClick.previousElementSibling.childNodes[1].src = `${window.location.origin}/img/not-checked.png`
+            }
+        }
     }
 })
 
