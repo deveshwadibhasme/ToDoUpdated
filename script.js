@@ -1,33 +1,23 @@
 let taskInput = document.querySelector('.input')
-let taskValue = document.querySelector('.task-value')
 let taskContainer = document.querySelector('.task-list-container')
-let taskListLI = document.querySelector('.task-list')
+let count = 0;                                              //For counting tasks and animation effect
 
-function addTask() {                                        // Function for trigger add button
-    if (taskInput.value === '') {
-    }
-    else {
-        taskAdd();
-    }
-    saveForLater()
-}
-let currentTiming = new Date().toLocaleTimeString('en-us',  // Function for Current Timing
-    {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-    })
-
-function taskAdd() {                                        // HTML function for Adding task to taskContainer
+function taskAdd() {                                        // Function for Adding task to taskContainer
     if (taskInput.value === '') {
     } else {
+        let currentTiming = new Date().toLocaleTimeString('en-us',
+            {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            })
         let taskList = document.createElement('li')
         taskList.className = 'task-list'
-        taskListAnime(taskList);
+        taskListAnime(taskList);                //for adding animation effect to the task
         taskList.innerHTML = `<div class = "check function">
                     <img src = "/img/not-checked.png" class = "check-tap" alt= "check">
                 </div>
-                <input class = "task-value" autofocus readonly value="${taskInput.value}" style = "cursor:pointer;"></input>
+                <textarea class = "task-value" autofocus readonly style = "cursor:pointer;">${taskInput.value}</textarea>
                 <div class = "edit function">
                     <img src = "/img/edit.png" class="edit-tap" alt="edit">
                 </div>
@@ -41,6 +31,16 @@ function taskAdd() {                                        // HTML function for
     taskInput.value = ''
 }
 
+function addTask() {                                        // Function for trigger add button
+    if (taskInput.value === '') {
+    }
+    else {
+        taskAdd();
+        count++;
+    }
+    saveForLater();
+}
+
 taskContainer.addEventListener('click', (e) => {            // Mouse Events Edit,Delete & Checked
     // Edit
     if (e.target.className === 'edit-tap') {
@@ -49,14 +49,12 @@ taskContainer.addEventListener('click', (e) => {            // Mouse Events Edit
         taskSelector.toggleAttribute('readonly')
         taskSelector.focus()
         taskSelector.setSelectionRange(taskSelector.value.length, taskSelector.value.length);
-        saveForLater();
         // Sign Changing
         let editDone = true
         if (e.target.src === `${window.location.origin}/img/edit.png`) {
             editDone = false
-            saveForLater();
         }
-        e.target.src = editDone ? `${window.location.origin}/img/edit.png` : `${window.location.origin}/img/edit-done.svg`
+        e.target.src = editDone ? `${window.location.origin}/img/edit.png` : `${window.location.origin}/img/edit-done.svg`;
         saveForLater();
     }
 
@@ -64,7 +62,8 @@ taskContainer.addEventListener('click', (e) => {            // Mouse Events Edit
     if (e.target.className === 'delete-tap') {
         const taskDeletion = e.target.parentNode.parentNode
         taskListAnime(e.target, taskDeletion)
-        setTimeout(() => {taskDeletion.remove(), saveForLater()}, 200);    }
+        setTimeout(() => { taskDeletion.remove(), saveForLater() }, 200);
+    }
 
     // Checked
     if (e.target.className === 'check-tap' || e.target.className === 'task-value') {
@@ -89,6 +88,7 @@ taskContainer.addEventListener('click', (e) => {            // Mouse Events Edit
     saveForLater();
 })
 
+
 taskContainer.addEventListener('keyup', (e) => {            // Keyboard Events Edit Done
     // Edit
     if (e.key === 'Enter') {
@@ -101,19 +101,18 @@ taskContainer.addEventListener('keyup', (e) => {            // Keyboard Events E
     }
     saveForLater();
 })
-taskInput.addEventListener('keyup', (e) => {                // Keyboard Events Edit,Delete & Check
+taskInput.addEventListener('keyup', (e) => {                // Keyboard Events  
+    //Enter Submision
     if (e.key === 'Enter') {
         if (taskInput.value === '') {
         }
         else {
             taskAdd();
         }
-
     }
     saveForLater();
 })
 
-let count = 0;
 function taskListAnime(fade, parentClass) {                 // RandomAnimation Function
     if (fade.className === 'task-list') {
         if (count % 2 === 0) {
@@ -129,15 +128,14 @@ function taskListAnime(fade, parentClass) {                 // RandomAnimation F
             parentClass.style.animation = 'faded-out-right 0.2s ease-out'
         }
     }
-    count++;
 }
 
-function saveForLater() {
+
+function saveForLater() {                                   //Saving data in local storage
     localStorage.setItem('data', taskContainer.innerHTML)
 }
 
-
-function showTheData() {
+function showTheData() {                                    // Showing data from local storage
     let data = localStorage.getItem('data')
     taskContainer.innerHTML = data
 }
