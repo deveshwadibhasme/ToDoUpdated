@@ -56,6 +56,12 @@ taskContainer.addEventListener('click', (e) => {            // Mouse Events Edit
         }
         e.target.src = editDone ? `${window.location.origin}/img/edit.png` : `${window.location.origin}/img/edit-done.svg`;
         saveForLater();
+        // Save the edited text
+        taskSelector.addEventListener('change', (e) => {
+            let editedText = e.target.value
+            taskSelector.innerHTML = editedText
+            saveForLater();
+        })
     }
 
     // Delete
@@ -88,7 +94,6 @@ taskContainer.addEventListener('click', (e) => {            // Mouse Events Edit
     saveForLater();
 })
 
-
 taskContainer.addEventListener('keyup', (e) => {            // Keyboard Events Edit Done
     // Edit
     if (e.key === 'Enter') {
@@ -101,6 +106,7 @@ taskContainer.addEventListener('keyup', (e) => {            // Keyboard Events E
     }
     saveForLater();
 })
+
 taskInput.addEventListener('keyup', (e) => {                // Keyboard Events  
     //Enter Submision
     if (e.key === 'Enter') {
@@ -129,7 +135,6 @@ function taskListAnime(fade, parentClass) {                 // RandomAnimation F
         }
     }
 }
-
 
 function saveForLater() {                                   //Saving data in local storage
     localStorage.setItem('data', taskContainer.innerHTML)
