@@ -44,24 +44,28 @@ function addTask() {                                        // Function for trig
 taskContainer.addEventListener('click', (e) => {            // Mouse Events Edit,Delete & Checked
     // Edit
     if (e.target.className === 'edit-tap') {
-        // Input Changing
-        const taskSelector = e.target.parentNode.previousElementSibling
-        taskSelector.toggleAttribute('readonly')
-        taskSelector.focus()
-        taskSelector.setSelectionRange(taskSelector.value.length, taskSelector.value.length);
-        // Sign Changing
-        let editDone = true
-        if (e.target.src === `${window.location.origin}/img/edit.png`) {
-            editDone = false
-        }
-        e.target.src = editDone ? `${window.location.origin}/img/edit.png` : `${window.location.origin}/img/edit-done.svg`;
-        saveForLater();
-        // Save the edited text
-        taskSelector.addEventListener('change', (e) => {
-            let editedText = e.target.value
-            taskSelector.innerHTML = editedText
+        let checkedBtn = e.target.parentNode.previousElementSibling.previousElementSibling.childNodes[1]
+        if (checkedBtn.src === `${window.location.origin}/img/checked.png`) {
+        } else {
+            // Input Changing
+            const taskSelector = e.target.parentNode.previousElementSibling
+            taskSelector.toggleAttribute('readonly')
+            taskSelector.focus()
+            taskSelector.setSelectionRange(taskSelector.value.length, taskSelector.value.length);
+            // Sign Changing
+            let editDone = true
+            if (e.target.src === `${window.location.origin}/img/edit.png`) {
+                editDone = false
+            }
+            e.target.src = editDone ? `${window.location.origin}/img/edit.png` : `${window.location.origin}/img/edit-done.svg`;
             saveForLater();
-        })
+            // Save the edited text
+            taskSelector.addEventListener('change', (e) => {
+                let editedText = e.target.value
+                taskSelector.innerHTML = editedText
+                saveForLater();
+            })
+        }
     }
 
     // Delete
